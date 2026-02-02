@@ -8,3 +8,8 @@ RUN npm run build
 
 # ตรวจสอบว่าไฟล์ถูกสร้างจริง
 RUN ls -la /app/dist
+
+# ใช้ Nginx เพื่อเสิร์ฟไฟล์ Static
+FROM nginx:latest
+WORKDIR /usr/share/nginx/html
+COPY --from=builder /app/dist .
